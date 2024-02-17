@@ -1,13 +1,13 @@
 # ENV VAR
-GH_TOKEN="ghp_123456789"
-HUB_HOST="asia-northeast1-docker.pkg.dev"
-HUB_FOLDER="techu-beta/gameapi"
-IMAGE_NAME="gameapi.mgt.frontend"
-OWNER="TechU8"
-REPO="GameAPI.MGT.FrontEnd"
-BRANCH="deploy/beta"
-NODE_VERSION="10.4"
-BUILD_CMD="npm ci && npm run build:beta"
+GH_TOKEN="ghp_123456789"  
+HUB_HOST="asia-northeast1-docker.pkg.dev"  
+HUB_FOLDER="techu-beta/gameapi"  
+IMAGE_NAME="gameapi.mgt.frontend"  
+OWNER="TechU8"  
+REPO="GameAPI.MGT.FrontEnd"  
+BRANCH="deploy/beta"  
+NODE_VERSION="10.4"  
+BUILD_CMD="npm ci && npm run build:beta"  
 
 # use
 ```sh
