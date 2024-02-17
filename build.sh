@@ -10,7 +10,7 @@ NODE_VERSION='$NODE_VERSION'
 BUILD_CMD='$BUILD_CMD'
 "
 
-CMD=$CMD_VAR'
+CMD=\'$CMD_VAR'
 GH_AUTH=`echo -n "x-access-token:$GH_TOKEN" | base64`
 BUILD_VERSION=1.0.0.0
 
@@ -32,6 +32,6 @@ gcloud auth configure-docker $HUB_HOST
 docker build -t $HUB_HOST/$HUB_FOLDER/$IMAGE_NAME:$BUILD_VERSION .
 docker push $HUB_HOST/$HUB_FOLDER/$IMAGE_NAME --all-tags
 echo $IMAGE_NAME:$BUILD_VERSION
-'
+'\'
 
 gcloud cloud-shell ssh --authorize-session --command=$CMD
