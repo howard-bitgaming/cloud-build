@@ -1,3 +1,7 @@
+# requirement
+* gcloud auth login
+* curl
+
 # use
 ```sh
 GH_TOKEN="ghp_123456789"
