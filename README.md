@@ -13,5 +13,5 @@ REPO="GameAPI.MGT.FrontEnd"
 BRANCH="deploy/beta"
 NODE_VERSION="10.4"
 BUILD_CMD="npm ci && npm run build:beta"
-curl -fsSL https://raw.githubusercontent.com/howard-bitgaming/cloud-build/main/build.sh | sh -
+source <(curl -fsSL https://raw.githubusercontent.com/howard-bitgaming/cloud-build/main/build.sh)
 ```
