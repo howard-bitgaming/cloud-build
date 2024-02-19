@@ -39,6 +39,7 @@ echo "OK" > ./dist/healthCheck.html
 gcloud auth configure-docker $HUB_HOST
 docker build -t $HUB_HOST/$HUB_FOLDER/$IMAGE_NAME:$BUILD_VERSION .
 docker push $HUB_HOST/$HUB_FOLDER/$IMAGE_NAME --all-tags
+docker rmi -f $(docker images -aq)
 echo $IMAGE_NAME:$BUILD_VERSION
 '
 
