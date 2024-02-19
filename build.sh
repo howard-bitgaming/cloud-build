@@ -10,6 +10,10 @@ REPO='$REPO'
 BRANCH='$BRANCH'
 NODE_VERSION='$NODE_VERSION'
 BUILD_CMD='$BUILD_CMD'
+DEPLOY_REPO='$DEPLOY_REPO'
+DEPLOY_BRANCH='$DEPLOY_BRANCH'
+DEPLOY_FILE='$DEPLOY_FILE'
+DEPLOY_KEY='$DEPLOY_KEY'
 "
 
 CMD=$CMD_VAR'
@@ -36,5 +40,21 @@ docker build -t $HUB_HOST/$HUB_FOLDER/$IMAGE_NAME:$BUILD_VERSION .
 docker push $HUB_HOST/$HUB_FOLDER/$IMAGE_NAME --all-tags
 echo $IMAGE_NAME:$BUILD_VERSION
 '
+
+if [ -n "$DEPLOY_REPO" ]
+then
+    CMD=$CMD'
+    cd ..
+    git clone -b $DEPLOY_BRANCH https://github.com/$OWNER/$DEPLOY_REPO.git
+    cd $DEPLOY_BRANCH
+    node <(curl -fsSL https://raw.githubusercontent.com/howard-bitgaming/helmfile-updater/main/dist/pure.js) --file=$DEPLOY_FILE --key=$DEPLOY_KEY --value=$BUILD_VERSION
+    git config user.name lazy-deploy
+    git config user.email lazy-deploy@bitgaming.biz
+    git add .
+    git commit -m "deploy $IMAGE_NAME$:$BUILD_VERSION"
+    git push
+    '
+fi
+
 
 gcloud cloud-shell ssh --authorize-session --command=$CMD
