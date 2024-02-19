@@ -3,8 +3,8 @@
 * curl
 
 # use
-```sh
-#!/bin/sh
+```bash
+#!/bin/bash
 GH_TOKEN="ghp_123456789"
 HUB_HOST="asia-northeast1-docker.pkg.dev"
 HUB_FOLDER="techu-beta/gameapi"
