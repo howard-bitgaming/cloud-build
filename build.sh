@@ -46,13 +46,13 @@ if [ -n "$DEPLOY_REPO" ]
 then
     CMD=$CMD'
     cd ..
-    git clone -b $DEPLOY_BRANCH https://github.com/$OWNER/$DEPLOY_REPO.git
+    git clone -b $DEPLOY_BRANCH https://github.com/$DEPLOY_OWNER/$DEPLOY_REPO.git
     cd $DEPLOY_REPO
     curl -fsSL https://raw.githubusercontent.com/howard-bitgaming/helmfile-updater/main/dist/pure.js -o pure.js
     docker run --rm -t -u 1000 -v .:/home/node/app -w /home/node/app node:20.11.1 sh -c "node pure.js --file=$DEPLOY_FILE --key=$DEPLOY_KEY --value=$BUILD_VERSION
     git config user.name lazy-deploy
     git config user.email lazy-deploy@bitgaming.biz
-    git add .
+    git add $DEPLOY_FILE
     git commit -m "deploy $IMAGE_NAME$:$BUILD_VERSION"
     git push
     '
