@@ -11,6 +11,7 @@ BRANCH='$BRANCH'
 NODE_VERSION='$NODE_VERSION'
 BUILD_CMD='$BUILD_CMD'
 DEPLOY_REPO='$DEPLOY_REPO'
+DEPLOY_OWNER='$DEPLOY_OWNER'
 DEPLOY_BRANCH='$DEPLOY_BRANCH'
 DEPLOY_FILE='$DEPLOY_FILE'
 DEPLOY_KEY='$DEPLOY_KEY'
@@ -47,7 +48,8 @@ then
     cd ..
     git clone -b $DEPLOY_BRANCH https://github.com/$OWNER/$DEPLOY_REPO.git
     cd $DEPLOY_BRANCH
-    node <(curl -fsSL https://raw.githubusercontent.com/howard-bitgaming/helmfile-updater/main/dist/pure.js) --file=$DEPLOY_FILE --key=$DEPLOY_KEY --value=$BUILD_VERSION
+    curl -fsSL https://raw.githubusercontent.com/howard-bitgaming/helmfile-updater/main/dist/pure.js -o /tmp/pure.js
+    node /tmp/pure.js --file=$DEPLOY_FILE --key=$DEPLOY_KEY --value=$BUILD_VERSION
     git config user.name lazy-deploy
     git config user.email lazy-deploy@bitgaming.biz
     git add .
