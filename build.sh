@@ -1,5 +1,16 @@
 #!/bin/sh
 
+AUTH_ACCOUNT=`gcloud auth list --filter="status:ACTIVE" --format="value(account)"`
+if [ -z "$AUTH_ACCOUNT" ]
+then
+  gcloud auth login
+fi
+
+if [ -z "$GH_TOKEN" ]
+then
+  GH_TOKEN=$GH_AUTH
+fi
+
 CMD_VAR="
 GH_TOKEN='$GH_TOKEN'
 HUB_PROJECT='$HUB_PROJECT'
