@@ -21,7 +21,7 @@ DEPLOY_REPO="action-test-helmfile"
 DEPLOY_OWNER="howard-bitgaming"
 DEPLOY_BRANCH="main"
 DEPLOY_FILE="./folder/sub/helmfile.yaml"
-DEPLOY_KEY="releases.*[name $= frontend].set.*[name $= tag].value"
+DEPLOY_KEY="fastpack-mgt-frontend"
 
 source <(curl -fsSL https://raw.githubusercontent.com/howard-bitgaming/cloud-build/main/build.sh)
 ```
