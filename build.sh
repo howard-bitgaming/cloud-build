@@ -2,6 +2,7 @@
 
 CMD_VAR="
 GH_TOKEN='$GH_TOKEN'
+HUB_PROJECT='$HUB_PROJECT'
 HUB_HOST='$HUB_HOST'
 HUB_FOLDER='$HUB_FOLDER'
 IMAGE_NAME='$IMAGE_NAME'
@@ -36,6 +37,7 @@ BUILD_VERSION=1.0.`git rev-list HEAD --count`.`git rev-list HEAD --count --all`
 echo $BUILD_VERSION > ./dist/version.html
 echo "OK" > ./dist/healthCheck.html
 
+gcloud config set project $HUB_PROJECT
 gcloud auth configure-docker $HUB_HOST
 docker build -t $HUB_HOST/$HUB_FOLDER/$IMAGE_NAME:$BUILD_VERSION .
 docker push $HUB_HOST/$HUB_FOLDER/$IMAGE_NAME --all-tags
