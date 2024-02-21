@@ -15,6 +15,7 @@ REPO="GameAPI.MGT.FrontEnd"
 BRANCH="deploy/beta"
 NODE_VERSION="10.4"
 BUILD_CMD="npm ci && npm run build:beta"
+VERSION_SUFFIX=""
 
 #optional
 DEPLOY_REPO="action-test-helmfile"
