@@ -44,7 +44,7 @@ git clone -b $BRANCH https://github.com/$OWNER/$REPO.git
 docker run --rm -t -u 1000 -v ./$REPO:/home/node/app -w /home/node/app node:$NODE_VERSION sh -c "$BUILD_CMD"
 
 cd $REPO
-BUILD_VERSION=1.0.`git rev-list HEAD --count`.`git rev-list HEAD --count --all`
+BUILD_VERSION=1.0.`git rev-list HEAD --count`$VERSION_SUFFIX
 echo $BUILD_VERSION > ./dist/version.html
 echo "OK" > ./dist/healthCheck.html
 
