@@ -3,6 +3,7 @@
 if [ -z "$GH_TOKEN" ] && [ -e "~/.build/env" ]
 then
     . ./env
+    echo "using previous build token"
 fi
 
 GH_AUTH=`echo -n "x-access-token:$GH_TOKEN" | base64`
