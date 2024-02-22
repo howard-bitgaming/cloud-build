@@ -1,13 +1,19 @@
 #!/bin/bash
 
+if [ -z "$GH_TOKEN" ] && [ -e "~/.build/env" ]
+then
+    . ./env
+fi
 
 GH_AUTH=`echo -n "x-access-token:$GH_TOKEN" | base64`
 BUILD_VERSION=1.0.0.0
 
 set -e
-sudo rm -fr ~/build 
-mkdir ~/build 
-cd ~/build
+sudo rm -fr ~/.build 
+mkdir ~/.build 
+cd ~/.build
+
+echo "GH_TOKEN=$GH_TOKEN" > env
 
 git config --global "http.https://github.com/.extraheader" "AUTHORIZATION: basic $GH_AUTH"
 git clone -b $BRANCH https://github.com/$OWNER/$REPO.git
@@ -24,7 +30,7 @@ gcloud auth configure-docker $HUB_HOST
 docker build -t $HUB_HOST/$HUB_FOLDER/$IMAGE_NAME:$BUILD_VERSION .
 docker push $HUB_HOST/$HUB_FOLDER/$IMAGE_NAME --all-tags
 docker rmi -f $(docker images -aq)
-echo $IMAGE_NAME:$BUILD_VERSION
+echo "$IMAGE_NAME:$BUILD_VERSION pushed"
 
 
 if [ -n "$DEPLOY_REPO" ]
@@ -39,4 +45,5 @@ then
     git add $DEPLOY_FILE
     git commit -m "deploy $IMAGE_NAME:$BUILD_VERSION"
     git push
+    echo "$DEPLOY_OWNER/$DEPLOY_REPO updated"
 fi
