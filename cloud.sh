@@ -8,11 +8,12 @@ fi
 
 GH_AUTH=`echo -n "x-access-token:$GH_TOKEN" | base64`
 BUILD_VERSION=1.0.0.0
+START_TIME=`date +%s`
+WORK_FOLDER="~/.build/$START_TIME"
 
 set -e
-sudo rm -fr ~/.build 
-mkdir ~/.build 
-cd ~/.build
+mkdir -p $WORK_FOLDER
+cd $WORK_FOLDER
 
 echo "GH_TOKEN=$GH_TOKEN" > env
 
@@ -37,12 +38,12 @@ then
 fi
 docker build -t $IMAGE_REF:$BUILD_VERSION .
 docker push $IMAGE_REF --all-tags
-echo "$IMAGE_NAME:$BUILD_VERSION pushed"
+echo "---------- $IMAGE_NAME:$BUILD_VERSION pushed"
 
 
 if [ -n "$DEPLOY_REPO" ]
 then
-    cd ..
+    cd $WORK_FOLDER
     git clone -b $DEPLOY_BRANCH https://github.com/$DEPLOY_OWNER/$DEPLOY_REPO.git
     cd $DEPLOY_REPO
     curl -fsSL https://raw.githubusercontent.com/howard-bitgaming/helmfile-updater/main/dist/pure.js -o pure.js
@@ -52,5 +53,10 @@ then
     git add $DEPLOY_FILE
     git commit -m "deploy $IMAGE_NAME:$BUILD_VERSION"
     git push
-    echo "$DEPLOY_OWNER/$DEPLOY_REPO updated"
+    echo "---------- $DEPLOY_OWNER/$DEPLOY_REPO updated"
 fi
+
+sudo rm -fr $WORK_FOLDER
+END_TIME=`date +%s`
+USED_TIME=$(($END_TIME - $START_TIME))
+echo "---------- total used `$(($USED_TIME / 60))`:`$(($USED_TIME % 60))`"
