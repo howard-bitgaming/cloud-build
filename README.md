@@ -3,7 +3,8 @@
 * curl
 
 # use
-if GH_TOKEN is empty ,GH_TOKEN=$GH_AUTH
+Token will be saved in ~/.build/env.
+If GH_TOKEN is empty ,will use previous token.
 ```bash
 #!/bin/bash
 GH_TOKEN="ghp_123456789"
