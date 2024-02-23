@@ -2,7 +2,7 @@
 
 if [ -z "$GH_TOKEN" ] && [ -e "~/.build/env" ]
 then
-    . ./env
+    . ~/.build/env
     echo "using previous build token"
 fi
 
