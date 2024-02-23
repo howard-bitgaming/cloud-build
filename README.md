@@ -3,7 +3,7 @@
 * curl
 
 # use
-Token will be saved in ~/.build/env.  
+GH_TOKEN will be saved in ~/.build/env.  
 If GH_TOKEN is empty ,will use previous token.
 ```bash
 #!/bin/bash
