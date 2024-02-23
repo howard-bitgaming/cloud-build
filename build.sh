@@ -6,11 +6,6 @@ then
   gcloud auth login
 fi
 
-if [ -z "$GH_TOKEN" ]
-then
-  GH_TOKEN=$GH_AUTH
-fi
-
 CMD_VAR="
 GH_TOKEN='$GH_TOKEN'
 HUB_PROJECT='$HUB_PROJECT'
