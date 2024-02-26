@@ -9,7 +9,7 @@ fi
 GH_AUTH=`echo -n "x-access-token:$GH_TOKEN" | base64`
 BUILD_VERSION=1.0.0.0
 START_TIME=`date +%s`
-WORK_FOLDER="~/.build/$START_TIME"
+WORK_FOLDER=~/.build/$START_TIME
 
 set -e
 mkdir -p $WORK_FOLDER
