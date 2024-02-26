@@ -59,4 +59,4 @@ fi
 sudo rm -fr $WORK_FOLDER
 END_TIME=`date +%s`
 USED_TIME=$(($END_TIME - $START_TIME))
-echo "---------- total used `$(($USED_TIME / 60))`:`$(($USED_TIME % 60))`"
+echo "---------- total used $(($USED_TIME / 60)):$(($USED_TIME % 60))"
