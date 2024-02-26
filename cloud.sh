@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ -z "$GH_TOKEN" ] && [ -e "~/.build/env" ]
+if [ -z "$GH_TOKEN" ] && [ -e ~/.build/env ]
 then
     . ~/.build/env
     echo "---------- using previous build token"
