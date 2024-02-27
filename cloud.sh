@@ -15,7 +15,7 @@ set -e
 mkdir -p $WORK_FOLDER
 cd $WORK_FOLDER
 
-echo "GH_TOKEN=$GH_TOKEN" > env
+echo "GH_TOKEN=$GH_TOKEN" > ~/.build/env
 
 git config --global "http.https://github.com/.extraheader" "AUTHORIZATION: basic $GH_AUTH"
 git clone -b $BRANCH https://github.com/$OWNER/$REPO.git
