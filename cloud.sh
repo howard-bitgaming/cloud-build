@@ -31,15 +31,12 @@ gcloud config set project $HUB_PROJECT
 gcloud auth configure-docker $HUB_HOST
 
 IMAGE_REF=$HUB_HOST/$HUB_FOLDER/$IMAGE_NAME
-OLD_IMAGES=$(docker images -aq -f=reference="$IMAGE_REF")
-if [ -n "$OLD_IMAGES" ]
-then
-    docker rmi -f $OLD_IMAGES
-fi
+#OLD_IMAGES=$(docker images -aq -f=reference="$IMAGE_REF")
+
 docker build -t $IMAGE_REF:$BUILD_VERSION .
 docker push $IMAGE_REF --all-tags
 echo "---------- $IMAGE_NAME:$BUILD_VERSION pushed"
-
+docker rmi -f $IMAGE_REF:$BUILD_VERSION
 
 if [ -n "$DEPLOY_REPO" ]
 then
