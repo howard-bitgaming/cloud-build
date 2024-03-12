@@ -34,7 +34,7 @@ IMAGE_REF=$HUB_HOST/$HUB_FOLDER/$IMAGE_NAME
 #OLD_IMAGES=$(docker images -aq -f=reference="$IMAGE_REF")
 
 docker build -t $IMAGE_REF:$BUILD_VERSION .
-docker push $IMAGE_REF --all-tags
+docker push $IMAGE_REF:$BUILD_VERSION
 echo "---------- $IMAGE_NAME:$BUILD_VERSION pushed"
 docker rmi -f $IMAGE_REF:$BUILD_VERSION
 
