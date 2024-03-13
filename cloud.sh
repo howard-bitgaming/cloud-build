@@ -20,7 +20,7 @@ echo "GH_TOKEN=$GH_TOKEN" > ~/.build/env
 git config --global "http.https://github.com/.extraheader" "AUTHORIZATION: basic $GH_AUTH"
 git clone -b $BRANCH https://github.com/$OWNER/$REPO.git
 
-docker run --rm -t -u 1000 -v ./$REPO:/home/node/app -w /home/node/app node:$NODE_VERSION sh -c "$BUILD_CMD"
+docker run --rm -t -u 0 -v ./$REPO:/home/node/app -w /home/node/app node:$NODE_VERSION sh -c "$BUILD_CMD"
 
 cd $REPO
 BUILD_VERSION=1.0.`git rev-list HEAD --count`$VERSION_SUFFIX
