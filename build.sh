@@ -25,4 +25,4 @@ DEPLOY_FILE='$DEPLOY_FILE'
 DEPLOY_KEY='$DEPLOY_KEY'
 "
 
-gcloud cloud-shell ssh --authorize-session --command="${CMD_VAR}`curl -fsSL https://raw.githubusercontent.com/howard-bitgaming/cloud-build/main/cloud.sh`"
+gcloud cloud-shell ssh --authorize-session --command="${CMD_VAR}`curl -fsSL -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/howard-bitgaming/cloud-build/main/cloud.sh`"
