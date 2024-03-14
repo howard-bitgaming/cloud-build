@@ -1,21 +1,31 @@
 #!/bin/bash
 
-if [ -z "$GH_TOKEN" ] && [ -e ~/.build/env ]
+BUILD_ROOT=~/.build
+
+if [ -z "$GH_TOKEN" ] && [ -e $BUILD_ROOT/env ]
 then
-    . ~/.build/env
+    . $BUILD_ROOT/env
     echo "---------- using previous build token"
 fi
 
 GH_AUTH=`echo -n "x-access-token:$GH_TOKEN" | base64`
 BUILD_VERSION=1.0.0.0
 START_TIME=`date +%s`
-WORK_FOLDER=~/.build/$START_TIME
+WORK_FOLDER=$BUILD_ROOT/$START_TIME
 
 set -e
 mkdir -p $WORK_FOLDER
+cd $BUILD_ROOT
+for f in 17*
+do 
+    if echo $f | grep -Eq '^[0-9]+$' && (($((($START_TIME - $f)/60))>120)); then 
+        rm -fr $f
+    fi
+done
+
 cd $WORK_FOLDER
 
-echo "GH_TOKEN=$GH_TOKEN" > ~/.build/env
+echo "GH_TOKEN=$GH_TOKEN" > $BUILD_ROOT/env
 
 git config --global "http.https://github.com/.extraheader" "AUTHORIZATION: basic $GH_AUTH"
 git clone -b $BRANCH https://github.com/$OWNER/$REPO.git
