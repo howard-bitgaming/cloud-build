@@ -19,8 +19,7 @@ cd $BUILD_ROOT
 for f in 17*
 do 
     if echo $f | grep -Eq '^[0-9]+$' && (($((($START_TIME - $f)/60))>120)); then 
-        #rm -fr $f
-        whoami
+        sudo rm -fr $f
     fi
 done
 
