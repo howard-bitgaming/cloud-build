@@ -12,6 +12,9 @@ GH_AUTH=`echo -n "x-access-token:$GH_TOKEN" | base64`
 BUILD_VERSION=1.0.0.0
 START_TIME=`date +%s`
 WORK_FOLDER=$BUILD_ROOT/$START_TIME
+CHMOD_CMD="
+chmod -R 777 /home/node/app
+"
 
 set -e
 mkdir -p $WORK_FOLDER
@@ -30,7 +33,7 @@ echo "GH_TOKEN=$GH_TOKEN" > $BUILD_ROOT/env
 git config --global "http.https://github.com/.extraheader" "AUTHORIZATION: basic $GH_AUTH"
 git clone -b $BRANCH https://github.com/$OWNER/$REPO.git
 
-docker run --rm -t -v ./$REPO:/home/node/app -w /home/node/app node:$NODE_VERSION sh -c "${BUILD_CMD}"
+docker run --rm -t -v ./$REPO:/home/node/app -w /home/node/app node:$NODE_VERSION sh -c "${BUILD_CMD}${CHMOD_CMD}"
 
 cd $REPO
 BUILD_VERSION=1.0.`git rev-list HEAD --count`$VERSION_SUFFIX
