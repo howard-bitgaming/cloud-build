@@ -10,7 +10,6 @@ fi
 
 GH_AUTH=`echo -n "x-access-token:$GH_TOKEN" | base64`
 BUILD_VERSION=1.0.0.0
-START_TIME=`date +%s`
 WORK_FOLDER=$BUILD_ROOT/$START_TIME
 CHMOD_CMD="
 chmod -R 777 /home/node/app
