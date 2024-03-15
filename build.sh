@@ -1,6 +1,7 @@
 #!/bin/sh
 
 AUTH_ACCOUNT=`gcloud auth list --filter="status:ACTIVE" --format="value(account)"`
+START_TIME=`date +%s`
 if [ -z "$AUTH_ACCOUNT" ]
 then
   gcloud auth login
@@ -26,3 +27,7 @@ DEPLOY_KEY='$DEPLOY_KEY'
 "
 
 gcloud cloud-shell ssh --authorize-session --command="${CMD_VAR}`curl -fsSL -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/howard-bitgaming/cloud-build/main/cloud.sh`"
+
+END_TIME=`date +%s`
+USED_TIME=$(($END_TIME - $START_TIME))
+echo "---------- total used $(($USED_TIME / 60)):$(($USED_TIME % 60))"
