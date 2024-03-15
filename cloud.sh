@@ -22,7 +22,9 @@ cd $BUILD_ROOT
 for f in 17*
 do 
     if echo $f | grep -Eq '^[0-9]+$' && (($((($CURRENT_TIME - $f)/60))>120)); then 
+        echo "---------- deleting $f folder"
         sudo rm -fr $f
+        echo "---------- deleted $f folder"
     fi
 done
 
