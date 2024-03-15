@@ -10,7 +10,8 @@ fi
 
 GH_AUTH=`echo -n "x-access-token:$GH_TOKEN" | base64`
 BUILD_VERSION=1.0.0.0
-WORK_FOLDER=$BUILD_ROOT/$START_TIME
+CURRENT_TIME=`date +%s`
+WORK_FOLDER=$BUILD_ROOT/$CURRENT_TIME
 CHMOD_CMD="
 chmod -R 777 /home/node/app
 "
@@ -20,7 +21,7 @@ mkdir -p $WORK_FOLDER
 cd $BUILD_ROOT
 for f in 17*
 do 
-    if echo $f | grep -Eq '^[0-9]+$' && (($((($START_TIME - $f)/60))>120)); then 
+    if echo $f | grep -Eq '^[0-9]+$' && (($((($CURRENT_TIME - $f)/60))>120)); then 
         sudo rm -fr $f
     fi
 done
@@ -66,6 +67,4 @@ then
 fi
 
 sudo rm -fr $WORK_FOLDER
-END_TIME=`date +%s`
-USED_TIME=$(($END_TIME - $START_TIME))
-echo "---------- total used $(($USED_TIME / 60)):$(($USED_TIME % 60))"
+
