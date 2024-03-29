@@ -5,6 +5,7 @@
 # use
 GH_TOKEN will be saved in ~/.build/env.  
 If GH_TOKEN is empty ,will use previous token.
+### build.sh
 ```bash
 #!/bin/bash
 GH_TOKEN="ghp_123456789"
@@ -26,4 +27,13 @@ DEPLOY_FILE="./folder/sub/helmfile.yaml"
 DEPLOY_KEY="fastpack-mgt-frontend"
 
 source <(curl -fsSL https://raw.githubusercontent.com/howard-bitgaming/cloud-build/main/build.sh)
+```
+
+### build.mjs
+```json
+{
+  "scripts": {
+      "deploy": "node ./build.mjs",
+  }
+}
 ```
