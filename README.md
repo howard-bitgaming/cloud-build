@@ -30,8 +30,8 @@ source <(curl -fsSL https://raw.githubusercontent.com/howard-bitgaming/cloud-bui
 ```
 
 #### build.mjs
+package.json
 ```json
-# package.json
 {
   "scripts": {
       "deploy": "node ./build.mjs",
