@@ -5,7 +5,7 @@ import _ from 'lodash'
 
 
 const startTime = Date.now()
-const { token = '', env = 'prod', deploy = true } = minimist(process.argv.slice(2))
+const { token = '', env = 'prod', image } = minimist(process.argv.slice(2))
 const envName = env !== 'beta' ? 'prod' : env
 
 const envVars = {
@@ -43,7 +43,7 @@ if (envName === 'beta') {
     VERSION_SUFFIX: "-beta"
   })
 }
-if (!deploy) {
+if (image) {
   envVars.DEPLOY_REPO = ''
 }
 
